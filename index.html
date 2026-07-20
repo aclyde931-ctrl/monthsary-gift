@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#170d1c" />
+  <title>The Match That Changed My Life</title>
+
+  <style>
+    :root {
+      --bg: #170d1c;
+      --bg2: #241029;
+      --card: rgba(255,255,255,.09);
+      --line: rgba(255,255,255,.13);
+      --text: #fff8fc;
+      --muted: #dbcbd7;
+      --pink: #ff6f9f;
+      --pink2: #ffbfd4;
+      --gold: #ffd58a;
+      --green: #91e6b3;
+      --shadow: 0 18px 50px rgba(0,0,0,.28);
+      --radius: 26px;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { background: var(--bg); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,111,159,.18), transparent 34%),
+        linear-gradient(180deg, var(--bg), #100812);
+    }
+
+    button { font: inherit; }
+    img { width: 100%; display: block; }
+
+    .app {
+      width: min(100%, 720px);
+      margin: 0 auto;
+      min-height: 100svh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100svh;
+      padding: 78px 22px 90px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: screenIn .45s ease;
+    }
+
+    .screen.active { display: flex; }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content { width: 100%; }
+
+    .center { text-align: center; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--gold);
+      letter-spacing: .14em;
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(2.5rem, 11vw, 4.3rem); line-height: 1.02; margin-bottom: 16px; }
+    h2 { font-size: clamp(2rem, 8vw, 3rem); line-height: 1.08; margin-bottom: 16px; }
+    h3 { font-size: 1.15rem; }
+    p { color: var(--muted); line-height: 1.72; }
+    .lead { font-size: 1.06rem; }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-photo {
+      width: 150px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 22px;
+      border: 4px solid rgba(255,255,255,.16);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-photo img,
+    .avatar img,
+    .photo-reveal img,
+    .memory-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .heart {
+      display: inline-block;
+      font-size: 3.2rem;
+      animation: beat 1.4s ease-in-out infinite;
+    }
+
+    @keyframes beat {
+      0%,100% { transform: scale(1); }
+      35% { transform: scale(1.14); }
+      55% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+    }
+
+    .btn {
+      width: 100%;
+      min-height: 54px;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+
+    .btn:active { transform: scale(.97); }
+
+    .btn-primary {
+      color: #32101c;
+      background: linear-gradient(135deg, var(--pink2), var(--pink));
+      box-shadow: 0 14px 28px rgba(255,111,159,.2);
+    }
+
+    .btn-soft {
+      color: var(--text);
+      background: var(--card);
+      border: 1px solid var(--line);
+    }
+
+    .button-stack { display: grid; gap: 12px; margin-top: 24px; }
+
+    .progress-wrap {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(100%, 720px);
+      z-index: 50;
+      padding: 14px 18px;
+      background: linear-gradient(180deg, rgba(16,8,18,.94), rgba(16,8,18,.25));
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .76rem;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 7px;
+      background: rgba(255,255,255,.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--pink), var(--gold));
+      transition: width .35s ease;
+    }
+
+    .versus {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 22px;
+      margin: 24px 0;
+    }
+
+    .avatar {
+      width: 86px;
+      aspect-ratio: 1;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,.16);
+    }
+
+    .vs { color: var(--gold); font-weight: 900; }
+
+    .game-choice {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .choice {
+      text-align: left;
+      min-height: 58px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .choice.correct {
+      border-color: rgba(145,230,179,.7);
+      background: rgba(145,230,179,.12);
+    }
+
+    .choice.wrong {
+      opacity: .55;
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin-top: 14px;
+      color: var(--pink2);
+      text-align: center;
+    }
+
+    .invite-card {
+      padding: 22px;
+      text-align: center;
+      margin: 22px 0;
+    }
+
+    .invite-icon { font-size: 2.4rem; margin-bottom: 12px; }
+
+    .chat {
+      padding: 17px;
+      margin-top: 22px;
+    }
+
+    .bubble {
+      max-width: 83%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 18px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: .35s ease;
+    }
+
+    .bubble.show { opacity: 1; transform: none; }
+    .bubble.you {
+      margin-left: auto;
+      color: #32101c;
+      background: linear-gradient(135deg, var(--pink2), var(--pink));
+      border-bottom-right-radius: 5px;
+    }
+
+    .bubble.her {
+      background: rgba(255,255,255,.1);
+      border-bottom-left-radius: 5px;
+    }
+
+    .routine-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .routine-btn {
+      min-height: 105px;
+      padding: 14px 8px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .routine-btn span { display: block; font-size: 1.8rem; margin-bottom: 8px; }
+    .routine-btn.done { background: rgba(255,111,159,.14); border-color: rgba(255,111,159,.5); }
+
+    .hospital-context {
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .hospital-context p:last-child { margin-bottom: 0; }
+
+    .thought-card {
+      padding: 20px;
+      margin: 14px 0;
+      cursor: pointer;
+      text-align: left;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .thought-card:active { transform: scale(.985); }
+
+    .thought-step {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .thought-card .question {
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .thought-card .tap-hint {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 400;
+    }
+
+    .thought-card .answer {
+      display: none;
+      color: var(--pink2);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .thought-card.open {
+      border-color: rgba(255,111,159,.55);
+      background: rgba(255,111,159,.12);
+    }
+
+    .thought-card.open .question { display: none; }
+    .thought-card.open .answer { display: block; }
+
+    .realization-ending {
+      display: none;
+      padding: 20px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .realization-ending.show {
+      display: block;
+      animation: screenIn .4s ease;
+    }
+
+    .hold-button {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .hold-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0;
+      background: rgba(255,255,255,.22);
+      pointer-events: none;
+    }
+
+    .photo-reveal {
+      width: min(100%, 330px);
+      aspect-ratio: 4/5;
+      margin: 22px auto;
+      border-radius: 26px;
+      overflow: hidden;
+      filter: blur(18px);
+      transition: filter .8s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .photo-reveal.clear { filter: blur(0); }
+
+    .calendar {
+      width: min(100%, 320px);
+      margin: 22px auto;
+      overflow: hidden;
+      border-radius: 26px;
+      background: #fff8fb;
+      color: #411523;
+      box-shadow: var(--shadow);
+    }
+
+    .calendar-head {
+      padding: 14px;
+      text-align: center;
+      color: #fff;
+      font-weight: 900;
+      background: linear-gradient(135deg,var(--pink),#ff477e);
+    }
+
+    .calendar-day {
+      padding: 30px 20px 8px;
+      text-align: center;
+      font-size: 6rem;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .calendar-note {
+      padding: 0 18px 26px;
+      text-align: center;
+      color: #6a3447;
+    }
+
+    .memory-stack {
+      position: relative;
+      height: 420px;
+      margin: 24px 0;
+    }
+
+    .memory-card {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border-radius: 26px;
+      background: #211226;
+      box-shadow: var(--shadow);
+      transition: transform .3s ease, opacity .3s ease;
+      touch-action: pan-y;
+    }
+
+    .memory-card img { height: 330px; }
+    .memory-caption { padding: 18px; color: var(--pink2); text-align: center; }
+
+    .memory-card:nth-child(2) { transform: scale(.96) translateY(12px); z-index: -1; opacity: .65; }
+    .memory-card:nth-child(3) { transform: scale(.92) translateY(24px); z-index: -2; opacity: .35; }
+
+    .love-options {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .love-tile {
+      min-height: 115px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .love-tile.revealed {
+      background: rgba(255,111,159,.15);
+      border-color: rgba(255,111,159,.55);
+    }
+
+    .letter {
+      padding: 24px;
+      background: #fff8fb;
+      color: #4a2331;
+      max-height: 62svh;
+      overflow-y: auto;
+    }
+
+    .letter p { color: #633a48; line-height: 1.85; }
+
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .counter-box {
+      padding: 18px 10px;
+      text-align: center;
+    }
+
+    .counter-box strong {
+      display: block;
+      color: var(--pink2);
+      font-size: 1.8rem;
+    }
+
+    .secret {
+      display: none;
+      padding: 22px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .secret.show { display: block; animation: screenIn .5s ease; }
+
+    .music {
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      z-index: 60;
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(30,15,35,.9);
+      color: #fff;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      pointer-events: none;
+      z-index: 3;
+      opacity: .6;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      to { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+    }
+
+
+
+    .ending-mark {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 2.6rem;
+      background: rgba(255,111,159,.12);
+      border: 1px solid rgba(255,191,212,.35);
+      animation: beat 1.8s ease-in-out infinite;
+    }
+
+    .ending-card {
+      padding: 26px;
+      margin: 24px 0;
+      text-align: left;
+    }
+
+    .ending-card p:last-child { margin-bottom: 0; }
+
+    .final-divider {
+      width: 86px;
+      height: 2px;
+      margin: 28px auto;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--pink2), transparent);
+    }
+
+    .end-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.05);
+      font-size: .86rem;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (min-width: 600px) {
+      .screen { padding-left: 42px; padding-right: 42px; }
+      .counter-grid { grid-template-columns: repeat(4,1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+
+    /* =========================================================
+       LIGHTWEIGHT DIGITAL GIFT INTRO
+    ========================================================= */
+    .gift-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,111,159,.22), transparent 32%),
+        linear-gradient(180deg, #160b1b, #0d0710);
+      transition: opacity .45s ease, visibility .45s ease;
+    }
+
+    .gift-intro.finished {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .gift-stage {
+      display: none;
+      width: min(100%, 430px);
+      text-align: center;
+      animation: screenIn .4s ease;
+    }
+
+    .gift-stage.active { display: block; }
+
+    .gift-card {
+      padding: 27px 22px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .gift-box-button {
+      width: 180px;
+      height: 170px;
+      margin: 8px auto 24px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .gift-box {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 8px;
+      height: 112px;
+      border-radius: 14px 14px 22px 22px;
+      background: linear-gradient(135deg, #ff8ab1, #ff4f87);
+      box-shadow: 0 20px 40px rgba(0,0,0,.3);
+    }
+
+    .gift-lid {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 35px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ffc0d5, #ff74a2);
+      transform-origin: 20% 100%;
+      transition: transform .55s ease;
+      z-index: 2;
+    }
+
+    .gift-ribbon-v,
+    .gift-ribbon-h {
+      position: absolute;
+      z-index: 3;
+      background: #ffe3ae;
+    }
+
+    .gift-ribbon-v { width: 24px; top: 35px; bottom: 8px; left: calc(50% - 12px); }
+    .gift-ribbon-h { height: 18px; left: 20px; right: 20px; bottom: 51px; }
+
+    .gift-bow {
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3.2rem;
+      z-index: 4;
+      transition: transform .5s ease, opacity .5s ease;
+    }
+
+    .gift-box-button.opened .gift-lid { transform: rotate(-22deg) translate(-14px,-25px); }
+    .gift-box-button.opened .gift-bow { transform: translateX(-50%) translateY(-18px) rotate(-12deg); opacity: .2; }
+
+    .gift-box-button:not(.opened) { animation: giftShake 2.4s ease-in-out infinite; }
+
+    @keyframes giftShake {
+      0%, 82%, 100% { transform: rotate(0); }
+      86% { transform: rotate(-2deg); }
+      90% { transform: rotate(2deg); }
+      94% { transform: rotate(-1deg); }
+    }
+
+    .loading-list { display: grid; gap: 13px; margin: 22px 0; text-align: left; }
+    .loading-item { color: var(--muted); opacity: .42; transition: opacity .25s ease; }
+    .loading-item.done { opacity: 1; color: var(--pink2); }
+
+    .gift-loader {
+      height: 9px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+    }
+
+    .gift-loader-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--gold));
+      transition: width .35s ease;
+    }
+
+    .phone {
+      width: min(100%, 300px);
+      margin: 20px auto;
+      padding: 12px;
+      border: 2px solid rgba(255,255,255,.2);
+      border-radius: 34px;
+      background: #09060b;
+      box-shadow: var(--shadow);
+    }
+
+    .phone-screen {
+      min-height: 470px;
+      padding: 28px 18px 20px;
+      border-radius: 25px;
+      display: flex;
+      flex-direction: column;
+      background:
+        linear-gradient(rgba(12,7,14,.22), rgba(12,7,14,.75)),
+        url('images/her.jpg') center/cover no-repeat;
+    }
+
+    .phone-time { font-size: 2.6rem; font-weight: 800; }
+    .phone-date { color: rgba(255,255,255,.82); font-size: .9rem; }
+
+    .notification {
+      margin-top: 44px;
+      padding: 14px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 18px;
+      background: rgba(20,12,23,.72);
+      backdrop-filter: blur(9px);
+    }
+
+    .notification small { color: var(--gold); }
+    .phone-spacer { flex: 1; }
+
+    .swipe-button {
+      background: rgba(255,255,255,.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    /* Achievements and hidden surprises */
+    .achievement-toast {
+      position: fixed;
+      left: 50%;
+      top: 72px;
+      z-index: 180;
+      width: min(calc(100% - 32px), 390px);
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(25,13,30,.95);
+      box-shadow: var(--shadow);
+      transform: translate(-50%, -140%);
+      opacity: 0;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .achievement-toast.show { transform: translate(-50%, 0); opacity: 1; }
+    .achievement-toast strong { display: block; color: var(--gold); margin-bottom: 3px; }
+    .achievement-toast span { color: var(--muted); font-size: .9rem; }
+
+    .secret-heart {
+      position: absolute;
+      right: 18px;
+      bottom: 76px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      color: white;
+      opacity: .42;
+      cursor: pointer;
+      animation: beat 1.8s ease-in-out infinite;
+    }
+
+    .secret-heart.found { opacity: 1; background: rgba(255,111,159,.22); }
+
+    .gift-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--pink2);
+      background: rgba(255,255,255,.06);
+      font-size: .82rem;
+    }
+
+    .intro-hidden { visibility: hidden; }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="gift-intro" id="giftIntro">
+    <section class="gift-stage active" data-gift-stage="0">
+      <div class="gift-card">
+        <div class="gift-badge">💝 A digital gift from Ram</div>
+        <p class="eyebrow">Made especially for you</p>
+        <h1>A Gift for My Baby</h1>
+        <p class="lead">Because distance makes it difficult to hand you a gift in person, I made somewhere you can feel how loved and appreciated you are.</p>
+
+        <button class="gift-box-button" id="openGift" aria-label="Open your gift">
+          <span class="gift-bow">🎀</span>
+          <span class="gift-lid"></span>
+          <span class="gift-box"></span>
+          <span class="gift-ribbon-v"></span>
+          <span class="gift-ribbon-h"></span>
+        </button>
+        <p>Tap the gift to open it ❤️</p>
+      </div>
+    </section>
+
+    <section class="gift-stage" data-gift-stage="1">
+      <div class="gift-card">
+        <div class="heart">💌</div>
+        <p class="eyebrow">Before you continue</p>
+        <h2>This is more than a website.</h2>
+        <p class="lead">This is my way of giving you something I cannot place in your hands yet—my memories, my promises, and a reminder that you are deeply appreciated.</p>
+        <button class="btn btn-primary" id="prepareGift">Prepare My Gift</button>
+      </div>
+    </section>
+
+    <section class="gift-stage" data-gift-stage="2">
+      <div class="gift-card">
+        <p class="eyebrow">Preparing something special</p>
+        <h2>Collecting Our Memories...</h2>
+        <div class="loading-list">
+          <div class="loading-item">♡ Finding our first game</div>
+          <div class="loading-item">♡ Reading our old conversations</div>
+          <div class="loading-item">♡ Gathering the moments that changed me</div>
+          <div class="loading-item">♡ Wrapping everything with love</div>
+        </div>
+        <div class="gift-loader"><div class="gift-loader-bar" id="giftLoaderBar"></div></div>
+        <p class="feedback" id="giftLoadText">0%</p>
+      </div>
+    </section>
+
+    <section class="gift-stage" data-gift-stage="3">
+      <div class="gift-card">
+        <div class="heart">♪</div>
+        <p class="eyebrow">One small choice</p>
+        <h2>This gift is better with music.</h2>
+        <p>You can always pause it later using the music button.</p>
+        <div class="button-stack">
+          <button class="btn btn-primary" id="giftMusicYes">Play Music</button>
+          <button class="btn btn-soft" id="giftMusicNo">Continue Without Music</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="gift-stage" data-gift-stage="4">
+      <div class="gift-card">
+        <p class="eyebrow">One notification changed everything</p>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-time">8:30</div>
+            <div class="phone-date">A night that led to forever</div>
+            <div class="notification">
+              <small>MAGIC CHESS: GO GO</small>
+              <strong>Ram invited you to play.</strong>
+              <p style="margin:5px 0 0;">Tap to return to the match.</p>
+            </div>
+            <div class="phone-spacer"></div>
+            <button class="btn swipe-button" id="unlockStory">Swipe Up to Unlock ↑</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="achievement-toast" id="achievementToast" aria-live="polite">
+    <strong id="achievementTitle">Achievement Unlocked</strong>
+    <span id="achievementText"></span>
+  </div>
+
+  <!--
+    SETUP:
+    Create an "images" folder beside this HTML file.
+    Add: cover.jpg, you.jpg, her.jpg, photo1.jpg to photo8.jpg
+    Add song.mp3 beside this HTML file.
+    Replace YOUR NAME and HER NAME.
+    Replace the relationship date near the bottom.
+  -->
+
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-top">
+      <span id="chapterLabel">Our Story</span>
+      <span id="progressText">1 / 13</span>
+    </div>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <button class="music" id="musicBtn" aria-label="Play or pause music">♪</button>
+  <audio id="music" loop preload="none">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="app intro-hidden" id="storyApp">
+
+    <section class="screen active" data-title="Opening">
+      <div class="content center">
+        <div class="heart">❤️</div>
+        <p class="eyebrow">A story made for you</p>
+        <h1>The Match That Changed My Life</h1>
+        <p class="lead">Every love story starts somewhere. Ours started from one random game.</p>
+        <div class="button-stack">
+          <button class="btn btn-primary next">Begin Our Story</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-title="For Her">
+      <div class="content center">
+        <div class="hero-photo">
+          <img src="images/her.jpg" alt="Her favorite photo">
+        </div>
+        <p class="eyebrow">From rivals to forever</p>
+        <h2>To my Baby, my favorite person.</h2>
+        <p class="lead">
+          Before we continue, tap the heart three times to unlock our first chapter.
+        </p>
+        <button class="btn btn-soft" id="heartUnlock">❤️ <span id="heartCount">0</span>/3</button>
+        <div class="button-stack">
+          <button class="btn btn-primary next hidden" id="unlockNext">Chapter Unlocked</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-title="The Match">
+      <button class="secret-heart" data-secret="Secret Memory #1: The rematch was the first small choice that led us here." aria-label="Find hidden memory">♡</button>
+      <div class="content center">
+        <p class="eyebrow">Level 1</p>
+        <h2>The Random Match</h2>
+
+        <div class="versus glass">
+          <div>
+            <div class="avatar"><img src="images/you.jpg" alt="Your photo"></div>
+            <strong>Ram</strong>
+          </div>
+          <div class="vs">VS</div>
+          <div>
+            <div class="avatar"><img src="images/her.jpg" alt="Her photo"></div>
+            <strong>baby Angge</strong>
+          </div>
+        </div>
+
+        <p>We were the final two players competing for Top 1. What happened next?</p>
+
+        <div class="game-choice">
+          <button class="choice" data-answer="wrong">you won?.</button>
+          <button class="choice" data-answer="correct">Ram won? .</button>
+          <button class="choice" data-answer="wrong">The game disconnected.</button>
+        </div>
+
+        <div class="feedback" id="matchFeedback" aria-live="polite"></div>
+        <button class="btn btn-primary next hidden" id="matchNext">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="The Rematch">
+      <div class="content center">
+        <p class="eyebrow">Level 2</p>
+        <h2>The Invitation</h2>
+
+        <div class="invite-card glass">
+          <div class="invite-icon">🎮</div>
+          <h3>I invited my baby to play again.</h3>
+          <p>Invitatation for another game sent?</p>
+          <div class="button-stack">
+            <button class="btn btn-primary" id="acceptInvite">Accept Invitation</button>
+            <button class="btn btn-soft" id="declineInvite">Decline</button>
+          </div>
+        </div>
+
+        <div id="inviteResult" class="feedback" aria-live="polite"></div>
+        <button class="btn btn-primary next hidden" id="inviteNext">Continue to Instagram</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="Instagram">
+      <div class="content">
+        <p class="eyebrow">Level 3</p>
+        <h2>From MCGG to Instagram</h2>
+        <p>Tap the phone to reveal our first conversations.</p>
+
+        <button class="btn btn-soft" id="showChat">📱 Open Our Chat</button>
+
+        <div class="chat glass hidden" id="firstChat">
+          <div class="bubble you">yellow po?</div>
+          <div class="bubble her">anong yellow 😊</div>
+          <div class="bubble you">hindi ako inantay mag laro oh, sana matalo ka haha</div>
+          <div class="bubble her">luh matalo daw</div>
+        </div>
+
+        <button class="btn btn-primary next hidden" id="chatNext">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="Daily Routine">
+      <div class="content center">
+        <p class="eyebrow">Level 4</p>
+        <h2>Our Daily Routine</h2>
+        <p>Tap every part of our day.</p>
+
+        <div class="routine-grid">
+          <button class="routine-btn" data-routine="morning"><span>☀️</span>Morning</button>
+          <button class="routine-btn" data-routine="game"><span>🎮</span>Play Time</button>
+          <button class="routine-btn" data-routine="night"><span>🌙</span>Late Night</button>
+        </div>
+
+        <div class="feedback" id="routineText">Three little routines became something I looked forward to every day.</div>
+        <button class="btn btn-primary next hidden" id="routineNext">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="The Realization">
+      <button class="secret-heart" data-secret="Secret Memory #2: Even inside the hospital, talking to you made me genuinely happy." aria-label="Find hidden memory">♡</button>
+      <div class="content center">
+        <p class="eyebrow">Level 5</p>
+        <h2>The Moment Everything Changed</h2>
+
+        <div class="hospital-context glass">
+          <p>
+            There was a time when everything suddenly became difficult. My grandfather was admitted
+            to the hospital, and most of my time was spent staying there with him.
+          </p>
+          <p>
+            Because of everything happening, I could not play with you or talk to you as much as before.
+            Even while I was worried about my grandfather, another thought kept appearing in my mind.
+          </p>
+        </div>
+
+        <p>Tap each thought in order to understand what I was feeling during those days.</p>
+
+        <div class="thought-card glass" data-thought="1">
+          <span class="thought-step">Thought 1</span>
+          <div class="question">
+            Something kept bothering me...
+            <span class="tap-hint">Tap to continue</span>
+          </div>
+          <div class="answer">
+            I kept wondering, “What if you start playing with someone else while I am away?”
+            I was afraid that someone else might become the person you always talked to and played with.
+          </div>
+        </div>
+
+        <div class="thought-card glass" data-thought="2">
+          <span class="thought-step">Thought 2</span>
+          <div class="question">
+            Then I started questioning myself...
+            <span class="tap-hint">Tap to continue</span>
+          </div>
+          <div class="answer">
+            Why was I so afraid of losing you? Why was I thinking about you so much, even while I was
+            inside the hospital dealing with everything happening around me?
+          </div>
+        </div>
+
+        <div class="thought-card glass" data-thought="3">
+          <span class="thought-step">The Truth</span>
+          <div class="question">
+            That was when I finally understood my feelings...
+            <span class="tap-hint">Tap to reveal</span>
+          </div>
+          <div class="answer">
+            I was not afraid because you were only my gaming friend anymore. I was afraid because you
+            had already become someone very important to me. Without realizing it, I had already fallen
+            in love with you. ❤️
+          </div>
+        </div>
+
+        <div class="realization-ending glass" id="realizationEnding">
+          <p>
+            Even during one of the hardest moments of my life, you stayed. You continued talking to me,
+            kept me company, and made those hospital days feel less lonely.
+          </p>
+          <p><strong>You had already become my safe place.</strong></p>
+        </div>
+
+        <button class="btn btn-primary next hidden" id="realizationNext">Continue to “You Stayed”</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="You Stayed">
+      <div class="content center">
+        <p class="eyebrow">Level 6</p>
+        <h2>You Stayed</h2>
+        <p>Hold the button until the photo becomes clear.</p>
+
+        <div class="photo-reveal" id="photoReveal">
+          <img src="images/photo1.jpg" alt="Her comforting photo">
+        </div>
+
+        <button class="btn btn-primary hold-button" id="holdBtn">
+          <span class="hold-fill" id="holdFill"></span>
+          <span>Press and Hold ❤️</span>
+        </button>
+
+        <p class="feedback" id="holdMessage">
+          You stayed up late just to talk to me and made difficult days feel lighter.
+        </p>
+
+        <button class="btn btn-primary next hidden" id="holdNext">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="May 22">
+      <div class="content">
+        <p class="eyebrow">May 22</p>
+        <h2>“May chance ako?”</h2>
+        <p>Tap each message to continue the conversation.</p>
+
+        <div class="chat glass" id="mayChat">
+          <div class="bubble her">Guess.</div>
+          <div class="bubble you">May chance ako?</div>
+          <div class="bubble her">Yes ❤️</div>
+        </div>
+
+        <button class="btn btn-soft" id="nextMessage">Show Next Message</button>
+        <p class="feedback" id="mayFeedback"></p>
+        <button class="btn btn-primary next hidden" id="mayNext">I was quietly screaming inside</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="May 24">
+      <div class="content center">
+        <p class="eyebrow">The best date</p>
+        <h2>May 24</h2>
+
+        <div class="calendar">
+          <div class="calendar-head">MAY</div>
+          <div class="calendar-day">24</div>
+          <div class="calendar-note">The day you officially became mine ❤️</div>
+        </div>
+
+        <p>Scratch the card by tapping it five times to reveal my message.</p>
+        <button class="btn btn-soft" id="scratchCard">✨ Tap to Reveal: <span id="scratchCount">0</span>/5</button>
+
+        <div class="secret glass" id="may24Secret">
+          I felt happy, grateful, and unbelievably lucky. Even in an LDR, I could already feel how real your love was.
+        </div>
+
+        <button class="btn btn-primary next hidden" id="may24Next">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="Photo Memories">
+      <button class="secret-heart" data-secret="Secret Memory #3: Every photo of you feels like a little piece of home." aria-label="Find hidden memory">♡</button>
+      <div class="content center">
+        <p class="eyebrow">Swipe or tap</p>
+        <h2>My Favorite Person</h2>
+        <p>Tap the photo to move to the next memory.</p>
+
+        <div class="memory-stack" id="memoryStack">
+          <article class="memory-card">
+            <img src="images/photo2.jpg" alt="Memory one">
+            <div class="memory-caption">Your smile is one of my favorite things.</div>
+          </article>
+          <article class="memory-card">
+            <img src="images/photo3.jpg" alt="Memory two">
+            <div class="memory-caption">You make ordinary days feel special.</div>
+          </article>
+          <article class="memory-card">
+            <img src="images/photo4.jpg" alt="Memory three">
+            <div class="memory-caption">No distance can change what I feel for you.</div>
+          </article>
+          <article class="memory-card">
+            <img src="images/photo5.jpg" alt="Memory four">
+            <div class="memory-caption">My favorite person, always.</div>
+          </article>
+        </div>
+
+        <p class="feedback" id="memoryProgress">Memory 1 of 4</p>
+        <button class="btn btn-primary next hidden" id="memoryNext">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="What I Love">
+      <div class="content center">
+        <p class="eyebrow">Tap every tile</p>
+        <h2>Things I Love About You</h2>
+
+        <div class="love-options">
+          <button class="love-tile" data-love="Your smile">❤️</button>
+          <button class="love-tile" data-love="Your kindness">❤️</button>
+          <button class="love-tile" data-love="Your support">❤️</button>
+          <button class="love-tile" data-love="Everything about you">❤️</button>
+        </div>
+
+        <button class="btn btn-primary next hidden" id="loveNext">Open My Letter</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="Love Letter">
+      <div class="content">
+        <p class="eyebrow">My letter to you</p>
+        <h2>My Love,</h2>
+
+        <div class="letter glass">
+          <p>
+            Who would have thought that one random match in Magic Chess: Go Go would lead me to the person
+            I now want to spend my whole life with?
+          </p>
+          <p>
+            We started as rivals competing for the top spot. I may have defeated you in that game, but
+            without realizing it, you were already beginning to win my heart.
+          </p>
+          <p>
+            When Grandpa was hospitalized, I became afraid that being busy might cause me to lose you.
+            That was when I truly realized that you were no longer just a friend to me. You were someone
+            I loved and someone I could no longer imagine losing.
+          </p>
+          <p>
+            Even during those difficult days, you stayed with me. You stayed up late just to talk and
+            made me smile inside the hospital.
+          </p>
+          <p>
+            Then came May 22, when I asked, “May chance ako?” And on May 24, you officially became mine.
+            That became one of the happiest days of my life.
+          </p>
+          <p>
+            You celebrate my achievements, support my decisions, and make me feel proud of myself.
+            When I got accepted at work, your happiness and pride made that moment even more special.
+          </p>
+          <p>
+            You are my best friend, my greatest supporter, my happiness, my forever, and my everything.
+          </p>
+          <p>
+            I promise to love you, stay loyal to you, support your dreams, and choose you every day.
+            No matter how far apart we are, my heart will always belong to you.
+          </p>
+          <p><strong>Happy monthsary, baby. I love you more than words can explain.</strong></p>
+          <p>Forever yours,<br><strong>Ram</strong></p>
+        </div>
+
+        <button class="btn btn-primary next" style="margin-top:16px;">Continue to Our Forever</button>
+      </div>
+    </section>
+
+    <section class="screen" data-title="Our Forever">
+      <div class="content center">
+        <p class="eyebrow">Since May 24</p>
+        <h2>Our Time Together</h2>
+
+        <div class="counter-grid">
+          <div class="counter-box glass"><strong id="days">0</strong><span>Days</span></div>
+          <div class="counter-box glass"><strong id="hours">0</strong><span>Hours</span></div>
+          <div class="counter-box glass"><strong id="minutes">0</strong><span>Minutes</span></div>
+          <div class="counter-box glass"><strong id="seconds">0</strong><span>Seconds</span></div>
+        </div>
+
+        <p>One final surprise is locked. Enter the date we became official.</p>
+        <input id="secretDate" type="text" inputmode="numeric" placeholder="MMDD" maxlength="4"
+          style="width:100%;min-height:52px;border-radius:16px;border:1px solid var(--line);background:var(--card);color:white;padding:14px;text-align:center;font-size:1.1rem;">
+        <button class="btn btn-primary" id="unlockFinal" style="margin-top:12px;">Unlock Final Message</button>
+
+        <div class="secret glass" id="finalSecret">
+          <div class="heart">❤️</div>
+          <h2>Thank you for saying yes.</h2>
+          <p>
+            If I had to play a thousand games again, I would still hope to meet you in every single one.
+          </p>
+          <p><strong>Happy Monthsary, HER NAME.</strong></p>
+          <p>You are my forever, my everything, and the only girl I want to love for the rest of my life.</p>
+          <button class="btn btn-primary next hidden" id="goToEnding" style="margin-top:16px;">Open the Final Page</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-title="The End">
+      <div class="content center">
+        <div class="ending-mark">❤️</div>
+        <p class="eyebrow">You reached the end</p>
+        <h2>The End of This Gift...</h2>
+        <p class="lead">But only the beginning of everything I still want to experience with you.</p>
+
+        <div class="ending-card glass">
+          <h3>Thank you, my love.</h3>
+          <p>
+            Thank you for saying yes, for staying, and for choosing me even though distance makes things difficult.
+          </p>
+          <p>
+            I cannot always be beside you or give you a gift in person, so I made this website hoping that,
+            even for a little while, it would feel like I was there with you.
+          </p>
+          <p>
+            Every line of code, every photo, every interaction, and every word in this website was made for you with love.
+          </p>
+        </div>
+
+        <div class="final-divider"></div>
+
+        <h2>Happy Monthsary, Baby Angge ❤️</h2>
+        <p>
+          I cannot wait for the day when I no longer have to love you only through a screen,
+          and I can finally hold your hand in person.
+        </p>
+        <p><strong>Until then, I will keep loving you, supporting you, and choosing you every day.</strong></p>
+
+        <div class="final-divider"></div>
+
+        <h3>See you in our next chapter.</h3>
+        <p class="lead">Our website ends here, but our story does not.</p>
+
+        <div class="end-label">❤️ End of the Website ❤️</div>
+        <p style="margin-top:24px;opacity:.7;font-size:.9rem;">Made with love by Ram<br>For Baby Angge</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const screens = [...document.querySelectorAll(".screen")];
+    const progressWrap = document.getElementById("progressWrap");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const chapterLabel = document.getElementById("chapterLabel");
+    let current = 0;
+
+    function showScreen(index) {
+      screens[current].classList.remove("active");
+      current = Math.max(0, Math.min(index, screens.length - 1));
+      screens[current].classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      if (current > 0) progressWrap.classList.remove("hidden");
+      const percent = ((current) / (screens.length - 1)) * 100;
+      progressBar.style.width = percent + "%";
+      progressText.textContent = `${current + 1} / ${screens.length}`;
+      chapterLabel.textContent = screens[current].dataset.title || "Our Story";
+    }
+
+    document.querySelectorAll(".next").forEach(btn => {
+      btn.addEventListener("click", () => showScreen(current + 1));
+    });
+
+    const music = document.getElementById("music");
+    const musicBtn = document.getElementById("musicBtn");
+    let playing = false;
+
+    async function toggleMusic() {
+      if (playing) {
+        music.pause();
+        playing = false;
+      } else {
+        try {
+          await music.play();
+          playing = true;
+        } catch {}
+      }
+      musicBtn.textContent = playing ? "❚❚" : "♪";
+    }
+
+    musicBtn.addEventListener("click", toggleMusic);
+    // Music is chosen during the digital gift introduction.
+
+    let heartTaps = 0;
+    document.getElementById("heartUnlock").addEventListener("click", () => {
+      heartTaps++;
+      document.getElementById("heartCount").textContent = Math.min(heartTaps, 3);
+      if (heartTaps >= 3) document.getElementById("unlockNext").classList.remove("hidden");
+    });
+
+    const matchFeedback = document.getElementById("matchFeedback");
+    document.querySelectorAll(".choice").forEach(choice => {
+      choice.addEventListener("click", () => {
+        document.querySelectorAll(".choice").forEach(c => c.disabled = true);
+        if (choice.dataset.answer === "correct") {
+          choice.classList.add("correct");
+          matchFeedback.textContent = "Correct. I won the match—but you got my heart.";
+        } else {
+          choice.classList.add("wrong");
+          matchFeedback.textContent = "Not quite. I beat you there beh, then invited you to play again.";
+        }
+        document.getElementById("matchNext").classList.remove("hidden");
+      });
+    });
+
+    document.getElementById("acceptInvite").addEventListener("click", () => {
+      document.getElementById("inviteResult").textContent = "Accepted ❤️ That simple tap changed everything.";
+      document.getElementById("inviteNext").classList.remove("hidden");
+    });
+
+    document.getElementById("declineInvite").addEventListener("click", () => {
+      document.getElementById("inviteResult").textContent = "Nice try 😄 In our real story, you accepted—and I’m forever thankful.";
+      document.getElementById("inviteNext").classList.remove("hidden");
+    });
+
+    document.getElementById("showChat").addEventListener("click", () => {
+      const chat = document.getElementById("firstChat");
+      chat.classList.remove("hidden");
+      chat.querySelectorAll(".bubble").forEach((b, i) => {
+        setTimeout(() => b.classList.add("show"), i * 450);
+      });
+      setTimeout(() => document.getElementById("chatNext").classList.remove("hidden"), 1900);
+    });
+
+    const routineMessages = {
+      morning: "Morning messages made the day begin with you.",
+      game: "MCGG became our little meeting place.",
+      night: "Late-night talks made me feel closer to you."
+    };
+
+    const routineDone = new Set();
+    document.querySelectorAll(".routine-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.classList.add("done");
+        routineDone.add(btn.dataset.routine);
+        document.getElementById("routineText").textContent = routineMessages[btn.dataset.routine];
+        if (routineDone.size === 3) document.getElementById("routineNext").classList.remove("hidden");
+      });
+    });
+
+    const openedThoughts = new Set();
+    document.querySelectorAll(".thought-card").forEach(card => {
+      card.addEventListener("click", () => {
+        card.classList.add("open");
+        openedThoughts.add(card.dataset.thought);
+
+        if (openedThoughts.size === 3) {
+          document.getElementById("realizationEnding").classList.add("show");
+          document.getElementById("realizationNext").classList.remove("hidden");
+        }
+      });
+    });
+
+    const holdBtn = document.getElementById("holdBtn");
+    const holdFill = document.getElementById("holdFill");
+    let holdTimer;
+    let holdStart;
+
+    function startHold() {
+      holdStart = performance.now();
+      holdTimer = requestAnimationFrame(updateHold);
+    }
+
+    function updateHold(now) {
+      const progress = Math.min((now - holdStart) / 1500, 1);
+      holdFill.style.width = (progress * 100) + "%";
+      if (progress >= 1) {
+        document.getElementById("photoReveal").classList.add("clear");
+        document.getElementById("holdNext").classList.remove("hidden");
+        cancelAnimationFrame(holdTimer);
+      } else {
+        holdTimer = requestAnimationFrame(updateHold);
+      }
+    }
+
+    function cancelHold() {
+      if (!document.getElementById("photoReveal").classList.contains("clear")) {
+        cancelAnimationFrame(holdTimer);
+        holdFill.style.width = "0";
+      }
+    }
+
+    ["pointerdown","touchstart"].forEach(e => holdBtn.addEventListener(e, startHold, { passive: true }));
+    ["pointerup","pointerleave","touchend","touchcancel"].forEach(e => holdBtn.addEventListener(e, cancelHold, { passive: true }));
+
+    let mayIndex = 0;
+    const mayBubbles = [...document.querySelectorAll("#mayChat .bubble")];
+    document.getElementById("nextMessage").addEventListener("click", () => {
+      if (mayIndex < mayBubbles.length) {
+        mayBubbles[mayIndex].classList.add("show");
+        mayIndex++;
+      }
+      if (mayIndex === mayBubbles.length) {
+        document.getElementById("mayFeedback").textContent = "I wanted to scream from happiness, but I had to stay quiet at the hospital.";
+        document.getElementById("mayNext").classList.remove("hidden");
+        document.getElementById("nextMessage").classList.add("hidden");
+      }
+    });
+
+    let scratch = 0;
+    document.getElementById("scratchCard").addEventListener("click", () => {
+      scratch++;
+      document.getElementById("scratchCount").textContent = Math.min(scratch, 5);
+      if (scratch >= 5) {
+        document.getElementById("may24Secret").classList.add("show");
+        document.getElementById("may24Next").classList.remove("hidden");
+      }
+    });
+
+    const stack = document.getElementById("memoryStack");
+    let memoryIndex = 1;
+    stack.addEventListener("click", () => {
+      const top = stack.querySelector(".memory-card");
+      if (!top) return;
+      top.style.transform = "translateX(110%) rotate(8deg)";
+      top.style.opacity = "0";
+      setTimeout(() => top.remove(), 300);
+      memoryIndex++;
+      const remaining = stack.querySelectorAll(".memory-card").length - 1;
+      document.getElementById("memoryProgress").textContent =
+        memoryIndex <= 4 ? `Memory ${memoryIndex} of 4` : "You opened every memory ❤️";
+      if (remaining <= 0) document.getElementById("memoryNext").classList.remove("hidden");
+    });
+
+    let loveCount = 0;
+    document.querySelectorAll(".love-tile").forEach(tile => {
+      tile.addEventListener("click", () => {
+        if (tile.classList.contains("revealed")) return;
+        tile.classList.add("revealed");
+        tile.textContent = tile.dataset.love;
+        loveCount++;
+        if (loveCount === 4) document.getElementById("loveNext").classList.remove("hidden");
+      });
+    });
+
+    const relationshipStart = new Date("2026-05-24T00:00:00");
+
+    function updateCounter() {
+      let diff = Math.max(0, Date.now() - relationshipStart.getTime());
+      const total = Math.floor(diff / 1000);
+      document.getElementById("days").textContent = Math.floor(total / 86400);
+      document.getElementById("hours").textContent = Math.floor((total % 86400) / 3600);
+      document.getElementById("minutes").textContent = Math.floor((total % 3600) / 60);
+      document.getElementById("seconds").textContent = total % 60;
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    document.getElementById("unlockFinal").addEventListener("click", () => {
+      const value = document.getElementById("secretDate").value.trim();
+      if (value === "0524") {
+        document.getElementById("finalSecret").classList.add("show");
+        document.getElementById("goToEnding").classList.remove("hidden");
+        createCelebration();
+      } else {
+        document.getElementById("secretDate").value = "";
+        document.getElementById("secretDate").placeholder = "Hint: May 24";
+      }
+    });
+
+    function createHeart() {
+      if (document.hidden) return;
+      const h = document.createElement("div");
+      h.className = "floating-heart";
+      h.textContent = Math.random() > .5 ? "❤" : "♡";
+      h.style.left = Math.random() * 95 + "vw";
+      h.style.fontSize = 12 + Math.random() * 10 + "px";
+      h.style.animationDuration = 6 + Math.random() * 3 + "s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 9500);
+    }
+
+    function createCelebration() {
+      for (let i = 0; i < 18; i++) setTimeout(createHeart, i * 90);
+    }
+
+    setInterval(createHeart, 2200);
+
+
+    /* =========================================================
+       DIGITAL GIFT INTRO + LIGHTWEIGHT ACHIEVEMENTS
+    ========================================================= */
+    const giftIntro = document.getElementById("giftIntro");
+    const storyApp = document.getElementById("storyApp");
+    const giftStages = [...document.querySelectorAll(".gift-stage")];
+    let giftStageIndex = 0;
+
+    function showGiftStage(index) {
+      giftStages[giftStageIndex].classList.remove("active");
+      giftStageIndex = index;
+      giftStages[giftStageIndex].classList.add("active");
+    }
+
+    document.getElementById("openGift").addEventListener("click", function () {
+      if (this.classList.contains("opened")) return;
+      this.classList.add("opened");
+      setTimeout(() => showGiftStage(1), 650);
+    });
+
+    document.getElementById("prepareGift").addEventListener("click", () => {
+      showGiftStage(2);
+      const items = [...document.querySelectorAll(".loading-item")];
+      const bar = document.getElementById("giftLoaderBar");
+      const label = document.getElementById("giftLoadText");
+      let step = 0;
+
+      const loadingTimer = setInterval(() => {
+        if (step < items.length) {
+          items[step].classList.add("done");
+          step++;
+          const percent = Math.round((step / items.length) * 100);
+          bar.style.width = percent + "%";
+          label.textContent = percent + "%";
+        } else {
+          clearInterval(loadingTimer);
+          setTimeout(() => showGiftStage(3), 450);
+        }
+      }, 520);
+    });
+
+    async function chooseGiftMusic(playIt) {
+      if (playIt && !playing) {
+        try {
+          await music.play();
+          playing = true;
+          musicBtn.textContent = "❚❚";
+        } catch {
+          playing = false;
+        }
+      }
+      showGiftStage(4);
+    }
+
+    document.getElementById("giftMusicYes").addEventListener("click", () => chooseGiftMusic(true));
+    document.getElementById("giftMusicNo").addEventListener("click", () => chooseGiftMusic(false));
+
+    document.getElementById("unlockStory").addEventListener("click", () => {
+      storyApp.classList.remove("intro-hidden");
+      giftIntro.classList.add("finished");
+      showAchievement("Gift Opened", "You unlocked Ram’s digital gift ❤️");
+      setTimeout(() => giftIntro.remove(), 500);
+    });
+
+    const achievementToast = document.getElementById("achievementToast");
+    let achievementTimer;
+
+    function showAchievement(title, text) {
+      clearTimeout(achievementTimer);
+      document.getElementById("achievementTitle").textContent = "🏆 " + title;
+      document.getElementById("achievementText").textContent = text;
+      achievementToast.classList.add("show");
+      achievementTimer = setTimeout(() => achievementToast.classList.remove("show"), 2600);
+    }
+
+    document.querySelectorAll(".secret-heart").forEach((heartButton) => {
+      heartButton.addEventListener("click", () => {
+        if (heartButton.classList.contains("found")) return;
+        heartButton.classList.add("found");
+        heartButton.textContent = "♥";
+        showAchievement("Hidden Heart Found", heartButton.dataset.secret);
+      });
+    });
+
+    // Small achievement hooks. No continuous animation or heavy observers.
+    document.getElementById("matchNext").addEventListener("click", () =>
+      showAchievement("First Match", "The match ended, but the real story began."));
+
+    document.getElementById("routineNext").addEventListener("click", () =>
+      showAchievement("Daily Routine", "You became part of every day."));
+
+    document.getElementById("may24Next").addEventListener("click", () =>
+      showAchievement("She Said Yes", "May 24 became one of the happiest dates."));
+
+    document.getElementById("loveNext").addEventListener("click", () =>
+      showAchievement("Heart Collector", "You revealed everything Ram loves about you."));
+
+  </script>
+</body>
+</html>
